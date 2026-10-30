@@ -1,0 +1,225 @@
+* { box-sizing: border-box; }
+:root {
+  --bg-app: #10141d;
+  --bg-sidebar: #151b27;
+  --bg-hover: #202938;
+  --bg-active: #292744;
+  --bg-stage: #1a1a1a;
+  --text-main: #e8edf7;
+  --text-muted: #78859b;
+  --text-item: #aab5c7;
+  --border-color: #252d3b;
+  --color-accent: #8975ff;
+  --color-accent-glow: #6555e433;
+  color-scheme: dark;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body[data-theme="light"] {
+  --bg-app: #f3f4f6;
+  --bg-sidebar: #ffffff;
+  --bg-hover: #f3f4f6;
+  --bg-active: #e5e7eb;
+  --bg-stage: #ffffff;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-item: #4b5563;
+  --border-color: #e5e7eb;
+  --color-accent: #6d5cff;
+  --color-accent-glow: #6d5cff33;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-app);
+  color: var(--text-main);
+  transition: background 0.2s, color 0.2s;
+}
+
+button, input { font: inherit; }
+button { color: inherit; }
+
+/* استایل‌های صفحه نصب و موفقیت */
+.full-screen-view {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-app);
+  z-index: 1000;
+  direction: rtl;
+}
+
+.setup-card {
+  background: var(--bg-sidebar);
+  padding: 40px;
+  border-radius: 16px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+}
+
+.setup-card h1 { margin: 0 0 12px; font-size: 24px; color: var(--text-main); }
+.setup-card p { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 28px; }
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 4px 12px var(--color-accent-glow);
+}
+
+.primary-btn:hover { background: #6d5cff; }
+
+/* دکمه ریست/خروج برای تست */
+.secondary-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.secondary-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+/* استایل‌های بدنه اصلی برنامه */
+.app-shell { display: flex; width: 100%; height: 100%; direction: ltr; }
+.sidebar { order: 2; width: 252px; flex: 0 0 252px; background: var(--bg-sidebar); border-left: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 24px 16px 15px; direction: rtl; transition: background 0.2s; }
+
+.brand { display: flex; align-items: center; gap: 12px; padding: 0 7px 31px; }
+.brand-mark, .placeholder-mark { display: grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(145deg,#8066ff,#4b43bd); border-radius: 13px; box-shadow: 0 7px 24px var(--color-accent-glow); }
+.brand-mark { width: 42px; height: 42px; font-size: 23px; }
+.brand strong { display: block; font-size: 19px; letter-spacing: .3px; }
+.brand small { display: block; color: var(--text-muted); font-size: 10px; direction: ltr; text-align: right; margin-top: 3px; }
+
+.tab-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 4px;
+  margin: 2px 0;
+}
+
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 12px 13px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--text-item);
+  background: transparent;
+  text-align: right;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.side-item:hover { background: var(--bg-hover); color: var(--text-main); }
+.side-item.active { color: var(--text-main); background: var(--bg-active); box-shadow: inset -2px 0 var(--color-accent); }
+.side-icon { font-size: 18px; width: 20px; text-align: center; flex-shrink: 0; }
+
+.tab-title-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.btn-action {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 1;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-action:hover { background: var(--border-color); color: var(--text-main); }
+.btn-close:hover { color: #ff6b6b; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 13px;
+  color: var(--text-item);
+  font-size: 13px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2b3546;
+  transition: .3s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #aab5c7;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider { background-color: var(--color-accent); }
+input:checked + .slider:before { transform: translateX(18px); background-color: #fff; }
+body[data-theme="light"] .slider { background-color: #cbd5e1; }
+body[data-theme="light"] .slider:before { background-color: #fff; }
+
+.version { color: var(--text-muted); font-size: 9px; letter-spacing: 1px; text-align: center; padding-top: 9px; direction: ltr; margin-top: 8px; }
+
+.main-panel { order: 1; min-width: 0; flex: 1; display: flex; flex-direction: column; direction: ltr; background: var(--bg-app); }
+
+.browser-stage { position: relative; flex: 1; min-height: 0; background: var(--bg-stage); }
+.browser-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 13px; color: var(--text-muted); background: var(--bg-app); font-size: 12px; pointer-events: none; }
+.placeholder-mark { width: 50px; height: 50px; font-size: 27px; border-radius: 15px; }

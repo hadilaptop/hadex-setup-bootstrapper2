@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <title>HADEX GPT Setup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- صفحه ۱: خوش‌آمدگویی و نصب -->
+  <div id="installer-view" class="full-screen-view">
+    <div class="setup-card">
+      <div class="brand-mark" style="width: 64px; height: 64px; font-size: 32px; margin: 0 auto 20px;">H</div>
+      <h1>HADEX GPT</h1>
+      <p>به نصب‌کننده خوش آمدید. برای شروع فرآیند نصب و اتصال حساب‌های کاربری، روی دکمه زیر کلیک کنید.</p>
+      <button id="btnInstall" class="primary-btn">نصب و شروع (Install)</button>
+      <button id="btnLogoutInstaller" class="secondary-btn">پاک کردن حساب‌ها (تست)</button>
+    </div>
+  </div>
+
+  <!-- صفحه ۲: مرورگر (برای لاگین) -->
+  <div class="app-shell" id="browser-view" style="display: none;">
+    <main class="main-panel">
+      <section class="browser-stage">
+        <div class="browser-placeholder" id="browserPlaceholder">
+          <div class="placeholder-mark">H</div>
+          <span>در حال آماده‌سازی Chromium…</span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">H</div>
+        <div><strong>HADEX GPT</strong></div>
+      </div>
+      
+      <div class="sidebar-menu" style="display: flex; flex-direction: column; width: 100%;">
+        <div class="tab-container">
+          <button class="side-item" id="googleLoginBtn">
+            <span class="side-icon" style="color: #ea4335;">G</span>
+            <span class="tab-title-text">ورود به حساب گوگل</span>
+          </button>
+          <button class="btn-action" id="googleRefreshBtn" title="ورود مجدد">↻</button>
+        </div>
+        
+        <div id="sidebarTabs" style="display: flex; flex-direction: column; width: 100%;"></div>
+        
+        <button class="side-item" id="confirmLoginBtn" style="margin-top: 10px; justify-content: center; border: 1px solid var(--border-color);">
+          <span class="side-icon">✓</span>
+          <span class="tab-title-text">تایید دستی لاگین‌ها</span>
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="side-item" id="googleLogoutBtn" style="color: #ff6b6b; margin-bottom: 8px;">
+          <span class="side-icon">🚪</span> <span class="tab-title-text">خروج از حساب</span>
+        </button>
+        
+        <div class="theme-switch-container">
+          <span class="theme-label">حالت روشن</span>
+          <label class="switch">
+            <input type="checkbox" id="themeCheckbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        
+        <div class="version">HADEX GPT · Setup Phase</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- صفحه ۳: موفقیت و مرحله بعد -->
+  <div id="success-view" class="full-screen-view" style="display: none;">
+    <div class="setup-card">
+      <div class="brand-mark" style="width: 64px; height: 64px; font-size: 32px; margin: 0 auto 20px; background: #52c99a;">✓</div>
+      <h1>ورود موفقیت‌آمیز بود</h1>
+      <p>همه حساب‌های کاربری با موفقیت متصل شدند. حالا می‌توانید به مرحله بعدی نصب بروید.</p>
+      <button id="btnNext" class="primary-btn">ادامه نصب (Next Step)</button>
+      <button id="btnLogoutSuccess" class="secondary-btn">خروج از حساب‌ها (تست)</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
