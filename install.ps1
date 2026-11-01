@@ -17,15 +17,15 @@ Write-Host "Downloading the latest Hadex installer..." -ForegroundColor Cyan
 try {
     $Release = Invoke-RestMethod -Uri $ReleaseApi -Headers $Headers -Method Get
 } catch {
-    throw "No published GitHub Release is available yet. Publish a Release containing the Hadex installer EXE first. Details: $($_.Exception.Message)"
+    throw "Could not retrieve the latest GitHub Release. Details: $($_.Exception.Message)"
 }
 
 $Asset = $Release.assets |
-    Where-Object { $_.name -match '^Hadex Browser Setup .*\.exe$' } |
+    Where-Object { $_.name -match '^Hadex[ ._-]*Browser[ ._-]*Setup[ ._-].*\.exe$' } |
     Select-Object -First 1
 
 if (-not $Asset) {
-    throw "The latest Release does not contain a Hadex Browser Setup EXE asset."
+    throw "The latest Release does not contain a Hadex Browser Setup EXE asset. Release: $($Release.tag_name)"
 }
 
 $DownloadDirectory = Join-Path $env:TEMP "HadexSetup"
@@ -35,21 +35,14 @@ $InstallerPath = Join-Path $DownloadDirectory $Asset.name
 Write-Host "Release: $($Release.tag_name)"
 Write-Host "Downloading: $($Asset.name)"
 
-Invoke-WebRequest -Uri $Asset.browser_download_url -OutFile $InstallerPath -UseBasicParsing
+try {
+    Invoke-WebRequest -Uri $Asset.browser_download_url -OutFile $InstallerPath -UseBasicParsing
+} catch {
+    throw "Failed to download the Hadex installer. Details: $($_.Exception.Message)"
+}
 
 if (-not (Test-Path -LiteralPath $InstallerPath -PathType Leaf)) {
     throw "The installer download did not complete."
-}
-
-if ($Asset.digest -and $Asset.digest -match '^sha256:(.+)$') {
-    $ExpectedHash = $Matches[1].ToLowerInvariant()
-    $ActualHash = (Get-FileHash -LiteralPath $InstallerPath -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($ActualHash -ne $ExpectedHash) {
-        throw "SHA256 verification failed. The installer will not be started."
-    }
-    Write-Host "SHA256 verification succeeded." -ForegroundColor Green
-} else {
-    Write-Warning "The Release did not provide a SHA256 digest. The installer was downloaded from the official GitHub Release asset URL."
 }
 
 Write-Host "Starting the Hadex installer. Complete the sign-in steps in its window." -ForegroundColor Green
