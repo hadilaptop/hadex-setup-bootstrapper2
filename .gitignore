@@ -1,0 +1,16 @@
+# Local dependencies and build output
+node_modules/
+dist/
+release/
+out/
+
+# Authentication/session data - never publish
+auth.json
+.env
+.env.*
+!.env.example
+
+# Local machine files
+*.log
+.DS_Store
+Thumbs.db

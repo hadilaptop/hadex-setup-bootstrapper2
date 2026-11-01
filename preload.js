@@ -19,5 +19,7 @@ contextBridge.exposeInMainWorld("hadexBrowser", {
   logoutGoogle: () => ipcRenderer.invoke("app:logout-google"),
   checkLogins: () => ipcRenderer.invoke("app:check-logins"),
   executeNextStep: () => ipcRenderer.invoke("app:execute-next-step"),
-  setViewMode: (mode) => ipcRenderer.invoke("app:set-view-mode", mode)
+  setViewMode: (mode) => ipcRenderer.invoke("app:set-view-mode", mode),
+  showAlert: (options) => ipcRenderer.invoke("app:show-alert", options),
+  showConfirm: (options) => ipcRenderer.invoke("app:show-confirm", options)
 });

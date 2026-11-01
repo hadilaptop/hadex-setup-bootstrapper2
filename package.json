@@ -1,7 +1,7 @@
 {
   "name": "hadex-browser",
   "version": "1.0.0",
-  "description": "Hadex desktop browser with embedded Chromium",
+  "description": "Hadex desktop setup browser with bundled Electron Chromium",
   "main": "main.js",
   "private": true,
   "scripts": {
@@ -25,13 +25,22 @@
       "index.html",
       "style.css",
       "renderer.js",
-      "package.json"
+      "modal-preload.js",
+      "modal.html",
+      "modal.css",
+      "modal.js",
+      "package.json",
+      "!auth.json",
+      "!node_modules/**",
+      "!.git/**"
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -40,6 +49,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
-    }
+    },
+    "asar": true
   }
 }

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <title>HADEX</title>
+  <link rel="stylesheet" href="modal.css">
+</head>
+<body data-theme="dark">
+  <div class="modal-card" id="modalCard" data-type="info">
+    <div class="modal-titlebar">
+      <div class="modal-brand">
+        <div class="brand-mark">H</div>
+        <span id="modalTitle">پیام</span>
+      </div>
+      <button class="modal-close" id="modalClose" title="بستن">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-icon" id="modalIcon">!</div>
+      <div class="modal-content">
+        <p class="modal-message" id="modalMessage"></p>
+        <div class="modal-details-wrap" id="modalDetailsWrap" style="display: none;">
+          <button class="details-toggle" id="detailsToggle" type="button">
+            <span class="chevron">▾</span>
+            <span>جزئیات فنی</span>
+          </button>
+          <pre class="modal-details" id="modalDetails"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="btnCancel" style="display: none;">انصراف</button>
+      <button class="btn btn-primary" id="btnOk">تایید</button>
+    </div>
+  </div>
+
+  <script src="modal.js"></script>
+</body>
+</html>
